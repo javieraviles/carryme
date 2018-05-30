@@ -1,0 +1,21 @@
+
+
+
+<div ng-show='loginObj.user === null'>
+    <h1 align="center">Welcome to CarryMe!</h1>
+    <h4 align="center">Traveling with empty seats? You are losing money!</h4>
+    <h4 align="center">Try now CarryMe, the easiest way of sharing car.</h4>
+    
+    <form class="form-signin" role="form">
+        <input type="email" ng-model="email" class="form-control" placeholder="email address" required="" autofocus="">
+        <input type="password" ng-model="pass" class="form-control" placeholder="Password" required="">
+        <button class="btn btn-lg btn-success btn-block" ng-click="login()">Sign in</button>
+        <a style="color:white;" href="#/login"><p class="text-center">Sign up</p></a>
+        <div ng-show='loginError!=null' class="alert alert-danger" role="alert">Something went wrong: {{loginError}}</div>
+    </form>
+</div>
+<div ng-show='loginObj.user != null'>
+    <h1>¡Welcome to CarryMe, {{user.name}}!</h1>
+    <a href='#/profile'><button type="button" class="btn btn-success">My profile</button></a>
+    <button type="button" class="btn btn-danger" ng-click="loginObj.$logout()">Logout</button>
+</div>

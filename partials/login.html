@@ -1,0 +1,31 @@
+
+<a href='#/'><button type="button" class="btn btn-warning btn-xs">Back to index</button></a>
+
+<div ng-show='loginObj.user === null'>
+
+    
+    
+    <form class="form-signin" role="form">
+        <h2 ng-hide="createMode" class="form-signin-heading">Sign in:</h2>
+        <h2 ng-show="createMode" class="form-signin-heading">Sign up:</h2>
+        <input type="email" ng-model="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <input type="password" ng-model="pass" class="form-control" placeholder="Password" required="">
+        <input type="text" placeholder="Name" class="form-control" ng-model="name" ng-show="createMode">
+        <input type="tel" placeholder="Phone number" class="form-control" ng-model="phone" ng-show="createMode">
+        <input type="password" placeholder="Repeat password" class="form-control" ng-show="createMode" ng-model="confirm">
+        <button class="btn btn-lg btn-success btn-block" ng-click="login()" ng-hide="createMode">Sign in</button>
+        <button class="btn btn-lg btn-success btn-block" ng-click="createMode = true" ng-hide="createMode">Sign up</button>
+        <button class="btn btn-lg btn-success btn-block" ng-show="createMode" ng-click="createUser()">Create an account</button>
+        <button class="btn btn-lg btn-success btn-block" ng-show="createMode" ng-click="createMode = false">Cancel</button>
+        <div ng-show='loginError!=null' class="alert alert-danger" role="alert">Something went wrong: {{loginError}}</div>
+    </form>
+    
+    
+    
+</div>
+
+<div ng-show='loginObj.user != null'>
+    <h3>You are already logged, {{user.name}}!</h3>
+    <a href='#/profile'><button type="button" class="btn btn-success">My profile</button></a>
+    <button type="button" class="btn btn-danger" ng-click="loginObj.$logout()">Logout</button>
+</div>

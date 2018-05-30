@@ -1,0 +1,58 @@
+<div ng-show='loginObj.user === null'>
+    <h3>¡Welcome to CarryMe!</h3>
+    <h4>Sorry but must be logged to have access to the application.</h4>
+    <a href='#/login'><button type="button" class="btn btn-success btn-lg">Login</button></a>
+</div>
+
+<div ng-show='loginObj.user != null'>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <a href='#/profile'><button type="button" class="btn btn-warning btn-xs">Back to profile</button></a>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <a ng-show="loginObj.user" class="pull-right" style="color:white;" href="">{{user.name}}  <button class="btn btn-danger btn-xs" ng-click="loginObj.$logout()">Logout</button></a>
+    </div>
+</div>
+    <h2>Available cars</h2>
+
+     <label for="query">Search</label>
+    <input type="text" class="form-control" id="query" placeholder="Search" ng-model="query">
+    <br><br>
+    
+    <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+                <th>interested?</th>
+                <th><a href="" style="color:white;" ng-click="orderBy('owner')">Owner </a><span class="glyphicon glyphicon-chevron-down" style="cursor:pointer; font-size:10px;" ng-click="orderBy('-owner')"></span></th>
+                
+                <th><a href="" style="color:white;" ng-click="orderBy('from')">Origin </a><span class="glyphicon glyphicon-chevron-down" style="cursor:pointer; font-size:10px;" ng-click="orderBy('-from')"></span></th>
+                
+                <th><a href="" style="color:white;" ng-click="orderBy('destination')">Destination </a><span class="glyphicon glyphicon-chevron-down" style="cursor:pointer; font-size:10px;" ng-click="orderBy('-destination')"></span></th>
+                
+                <th><a href="" style="color:white;" ng-click="orderBy('date')">Date </a><span class="glyphicon glyphicon-chevron-down" style="cursor:pointer; font-size:10px;" ng-click="orderBy('-date')"></span></th>
+                
+                <th><a href="" style="color:white;" ng-click="orderBy('price')">Price </a><span class="glyphicon glyphicon-chevron-down" style="cursor:pointer; font-size:10px;" ng-click="orderBy('-price')"></span></th>
+                <th>Availability</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="car in cars | orderByPriority | filter:query | orderBy:selectedOrder" ng-show="(car.availableSeats>0)&&((car.date | date:'M')>=month)&&((car.date | date:'d')>=day)&&((car.date | date:'yyyy')>=year)">
+                <td><div ng-show="(user.name != car.owner)"><button type="button" class="btn btn-success btn-xs" ng-click="interested(car.$id,car)">I'm interested!</button></div></td>
+                <td>{{car.owner}}</td>
+                <td>{{car.from | uppercase}}</td>
+                <td>{{car.destination | uppercase}}</td>
+                <td>{{car.date | date:'fullDate'}} at {{car.time | date:'h:mma'}}</td>
+                <td>{{car.price | currency}}</td>
+                <td>{{car.availableSeats | number}} of {{car.seats | number}} <span ng-show="car.availableSeats===1" class="label label-warning">Last seat</span></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <div ng-show='error!=null' class="alert alert-danger" role="alert">Something went wrong: {{error}}</div>
+    <div ng-show='done!=null' class="alert alert-success" role="alert">The selection has been successful</div>
+    today: {{day}}/{{month}}/{{year}}
+</div>
+
+

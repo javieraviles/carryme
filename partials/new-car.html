@@ -1,0 +1,125 @@
+<div ng-show='loginObj.user === null'>
+    <h3>Welcome to CarryMe!</h3>
+    <h4>Sorry but must be logged to have access to the application.</h4>
+    <a href='#/login'><button type="button" class="btn btn-success btn-lg">Login</button></a>
+</div>
+<div ng-show='loginObj.user != null'>
+
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <a href='#/profile'><button type="button" class="btn btn-warning btn-xs">Back to profile</button></a>
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <a ng-show="loginObj.user" class="pull-right" style="color:white;" href="">{{user.name}}  <button class="btn btn-danger btn-xs" ng-click="loginObj.$logout()">Logout</button></a>
+    </div>
+</div>
+    
+    <div ng-show='done===false'>
+        
+        <form role="form">
+            <h2>Create a new car</h2>
+            <div class="form-group">
+                <label for="from">Departure</label>
+                <input type="text" class="form-control" id="from" ng-model="from" placeholder="e.g. London" required/>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination</label>
+                <input type="text" class="form-control" id="destination" ng-model="destination" placeholder="e.g. Manchester" required/>
+            </div>
+        </form>    
+            
+        <form class="form-inline" role="form">
+            <div class="form-group">
+                <label for="seats">Number of seats</label>
+                <input type="number" id="seats" class="form-control" ng-model="seats" min="1" placeholder="e.g. 3" required/>
+            </div>
+            <div class="form-group">
+                <label for="price">Price per seat</label>
+                <div class="input-group">
+                    <input type="number" id="price" class="form-control" ng-model="price" min="0" placeholder="e.g. 8" required/>
+                    <div class="input-group-addon">£</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date" class="form-control" ng-model="date" required/>
+            </div>
+            <div class="form-group">
+                <label for="time">Departure time</label>
+                <input type="time" id="time" class="form-control" ng-model="time" required/>
+            </div>
+            <div class="checkbox">
+                <label>
+                  <input ng-model="return" type="checkbox"> Return car
+                </label>
+            </div>
+            <div ng-show="return">
+                <div class="form-group">
+                    <label for="date2">Date</label>
+                    <input type="date" id="date2" class="form-control" ng-model="date2" required/>
+                </div>
+                <div class="form-group">
+                    <label for="time2">Departure time</label>
+                    <input type="time" id="time2" class="form-control" ng-model="time2" required/>
+                </div>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success btn-lg" ng-click="addCar()">Create car</button>
+            </div>
+        </form>
+        
+        
+        <br>
+        <h3>Already created cars <button ng-click="cleanCreatedCars()" class="btn btn-warning btn-sm">Clean cars</button></h3>
+            <br>
+            <ul style="margin-left:-15px;" class="list-inline">
+                <il ng-repeat="createdCar in createdCars">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
+                            <div class="panel panel-success">
+                                  <div class="panel-heading">
+                                        <h3 class="panel-title">
+                                            <div class="row">
+                                                <button class="btn btn-danger btn-sm col-xs-6 col-sm-6 col-md-6 col-lg-6" ng-click="useCar(createdCar)">Use this car</button>
+                                                <span style="font-size:26px;" class="visible-xs col-xs-1">{{createdCar.availableSeats}}</span>
+                                                <span style="font-size:26px;" class="visible-xs col-xs-3 glyphicon glyphicon-user"></span>
+                                                <span class="col-xs-2 col-sm-6 col-md-6 col-lg-6 pull-right" style="font-size:26px;"><strong>{{createdCar.price}}€</strong></span>
+                                            </div>
+                                        </h3>
+                                  </div>
+                                  <div class="panel-body" style="color:black;">
+                                        <div class="row">
+                                            <div id="origin" class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                                <h4 class="text-center">{{createdCar.from}}</h4>
+                                                <p class="text-center"><span class="glyphicon glyphicon-remove" style="font-size:20px;"></span></p>
+                                            </div>
+                                            <div id="path" class="hidden-xs col-sm-4 col-md-4 col-lg-4">
+                                                <p class="text-center">Available</p>
+                                                <p class="text-center">seats</p>
+                                                <p class="text-center">{{createdCar.availableSeats}}</p>
+                                            </div>
+                                            <div id="destination" class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                                                <h4 class="text-center">{{createdCar.destination}}</h4>
+                                                <p class="text-center"><span style="font-size:20px;" class="glyphicon glyphicon-flag"></span></p>
+                                            </div>
+                                        </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+                </il>
+            </ul>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    </div>
+    <div ng-show='done===true'>
+        <h3>Su coche se ha creado con éxito.</h3>
+    </div>
+</div>
