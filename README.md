@@ -2,7 +2,7 @@
 
 My very first project at university (UPCT, Spain) back in 2013: AngularJS + Firebase, including authentication and real-time database. Car sharing app. **Full of bad practices**, but it works.  
 
-[Live demo](http://tfg.tuappweb.es)
+[Live demo](http://carryme.tritogether.net)
 
 I didn't use bower, which at that time would have been the ideal tool as a frontEnd package manager, so angularJS 1.1 can be found in the /lib directory. For styling, Bootstrap 3 was used, can be found in /css folder.
 
